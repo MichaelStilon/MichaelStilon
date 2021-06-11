@@ -1,0 +1,238 @@
+PImage img;
+PFont font1;
+PFont font2;
+
+void setup() {
+  size(2000, 1000);
+  background(0);
+  font1 = loadFont("NexaBold-100.vlw");
+  font2 = loadFont("NexaBold-200.vlw");
+  img = loadImage("Hat.png");
+
+  #include <Mouse.h>
+    const int trigpin= 8; //pin 1
+  const int echopin= 7; //pin 2
+  long duration; //variable to read the echo pin 
+  int distance; //variable to calc distance
+
+  pinMode(trigpin, OUTPUT); 
+  pinMode(echopin, INPUT);
+  Serial.begin(9600); //communication to pc
+}
+void loop()
+{
+  digitalWrite(trigpin, HIGH); //set trigger pin to high & it makes the ultrasonic go beep (on)
+  delayMicroseconds(10); //duration of the beep
+  digitalWrite(trigpin, LOW); // makes it silent
+  duration=pulseIn(echopin, HIGH); // the duration in microseconds between the time that the trigger
+  // was send and recieved ( so the distance to the object and back)
+  distance = duration*0.034/2;
+  // convert duration to centimeters and devide by half bec we only need to know the distance from the display to the person 
+  Serial.println(distance);
+}
+
+
+void draw() {
+
+
+
+  background(#ECF2FF);
+
+  //SHIRT - ROUNDING OF RIGHT SIDE
+  fill(#244770); 
+  noStroke();
+  ellipse(405, 850, 500, 500);
+  ellipse(410, 925, 500, 500);
+
+  //SHIRT
+  fill(#244770);    
+  ellipse(300, 750, 650, 300); // shirt   
+  stroke(#000302);
+  strokeWeight(30);
+  line(400, 600, 550, 650); //black shoulder batch - right  
+  line(198, 600, 50, 650); //black shoulder batch - left   
+
+  //SHIRT BOTTOM
+  fill(#244770); 
+  noStroke();
+  rect(100, 1000, 900, 600);  
+
+
+  //SHIRT LINES
+  stroke(#09131C);
+  strokeWeight(5);
+  line(280, 700, 280, 1000); //line 1
+  line(320, 700, 320, 1000); //line 2
+
+  //COLLAR 
+  noStroke();
+  fill(#657E9A);
+  ellipse(300, 690, 50, 50);  //Collar middle part
+
+  //BUTTONS (Underlayer)
+  fill(#A6ADB2);
+  ellipse(300, 737, 25, 25); //top button
+  ellipse(300, 837, 25, 25); //middle button
+  ellipse(300, 937, 25, 25); //bottom button
+
+  //BUTTONS
+  fill(#09131C);
+  ellipse(300, 740, 25, 25); //top button
+  ellipse(300, 840, 25, 25); //middle button
+  ellipse(300, 940, 25, 25); //bottom button
+
+
+  //neck
+  noStroke();
+  rectMode(CORNER);
+  fill(#DEC38B); //skin colour
+  rect(225, 450, 150, 200);   
+  ellipse(300, 645, 150, 100);   
+
+
+  //left-side collar
+  stroke(#657E9A);
+  strokeWeight(30);
+  line(210, 600, 268, 700); //shirt collar - left side 1   
+  line(210, 600, 165, 640); //shirt collar - left side 2   
+  line(165, 640, 185, 790); //shirt collar - left side 3  
+  line(268, 700, 185, 790); //shirt collar - left side 4   
+  //left-side collar (rectangles used to fill)
+  noStroke();
+  fill(#657E9A);
+  rect(174, 620, 65, 120);  
+  rect(190, 717, 40, 40);  
+  rect(225, 675, 40, 50);  
+
+  //right-side collar
+  stroke(#657E9A);
+  strokeWeight(30);
+  line(385, 595, 336, 700); //shirt collar - right side 1   
+  line(385, 595, 430, 640); //shirt collar - right side 2   
+  line(430, 640, 410, 790); //shirt collar - right side 3  
+  line(336, 700, 410, 790); //shirt collar - right side 4   
+  //right-side collar (rectangles used to fill)
+  noStroke();
+  fill(#657E9A);
+  rect(357, 620, 65, 120); 
+  rect(365, 717, 40, 40);  
+  rect(340, 675, 40, 50);  
+
+  noFill();
+  noStroke();
+
+
+
+  //ear
+  ellipseMode(CENTER);
+  ellipse(150, 350, 50, 100); // left  
+  ellipse(450, 350, 50, 100); //right  
+  fill(#F2B26E);
+  ellipse(150, 350, 30, 60); //left   
+  ellipse(450, 350, 30, 60);// right  
+
+
+
+  //beard
+  fill(#DBD9D9); //color of beard 
+  rectMode(CENTER);
+  rect(300, 350, 300, 400);  
+  ellipse(300, 550, 300, 100);  
+
+  //face 
+  fill(#DEC38B);
+  ellipseMode(CENTER);
+  ellipse(300, 350, 300, 220);  
+
+  fill(#9D7751); //mouth
+  rectMode(CENTER);
+  rect(300, 480, 80, 10); 
+
+  //police hat 
+  image(img, 65, -100, 465, 450);  
+
+  //nose
+  ellipseMode(CENTER);
+  fill(#CEB581);
+  ellipse(300, 420, 25, 25); 
+  ellipse(285, 418, 25, 25); 
+  ellipse(315, 418, 25, 25);
+
+  fill(#9D7751); //noseholes
+  ellipse(285, 425, 10, 5); //left   
+  ellipse(315, 425, 10, 5); //right  
+
+
+  //eyebrows
+  fill(#DBD9D9);
+  rect(250, 300, 70, 20); 
+  rect(350, 300, 70, 20); 
+
+  //eyesockets
+  fill(#CEB581);
+  ellipse(250, 350, 90, 40);
+  ellipse(350, 350, 90, 40); 
+
+  //eyes 
+  fill(255);
+  ellipse(250, 355, 90, 40); //eye white left
+  ellipse(350, 355, 90, 40); //eye white right
+
+  //moving eyes part
+  float pupilX = map(mouseX, 0, width, 240, 270); //RULES  FOR LEFT X AXIS
+  float pupilY = map(mouseY, 0, height, 340, 370); //RULES  FOR Y AXIS
+  float pupilA = map(mouseX, 0, width, 340, 370); //RULES  FOR RIGHT X AXIS
+  fill(0);
+  ellipse(pupilX, pupilY, 40, 40); //eye pupil left  
+  ellipse(pupilA, pupilY, 40, 40); //eye pupil right 
+
+  float whiteX = map(mouseX, 0, width, 240, 270); //RULES  FOR LEFT X AXIS
+  float whiteY = map(mouseY, 0, height, 330, 360); //RULES  FOR Y AXIS
+  float whiteA = map(mouseX, 0, width, 340, 370); //RULES  FOR RIGHT X AXIS
+  fill(255);
+  ellipse(whiteX, whiteY, 8, 8); //small eye white left
+  ellipse(whiteA, whiteY, 8, 8); //small eye white right 
+
+  // Alternative coding for eyes
+  /*
+  ellipse(mouseX, 50, 30, 30);  // Draw gray ellipse using CENTER mode
+   
+   background(204);
+   float  x1 = map(mouseX, 0, width, 50, 150);
+   ellipse(x1, 180, 150, 50);  
+   float x2 = map(mouseX, 0, width, 0, 200);
+   ellipse(x2, 180, 50, 50);  
+   
+   float  x3 = map(mouseX, 0, width, 350, 500);
+   ellipse(x3, 180, 150, 50);  
+   float hello = map(mouseX, 0, width, 300, 600);
+   ellipse(hello, 180, 50, 50);  
+   */
+
+  fill(0);
+  textFont(font1);
+  textSize(80);
+  text("DON'T DRINK AND", 600, 380);
+
+  fill(#610C04);
+
+  textFont(font2);
+  textSize(200);
+  text("D", 595, 580);
+
+  fill(0);
+  text("R", 760, 580);
+  fill(#610C04);
+  text("I", 935, 580);
+
+  fill(0);
+  text("V", 1015, 580);
+
+  fill(#610C04);
+  text("E", 1170, 580);
+
+  fill(0);
+  textFont(font1);
+  textSize(40);
+  text("WE ARE WATCHING !", 600, 250);
+}
